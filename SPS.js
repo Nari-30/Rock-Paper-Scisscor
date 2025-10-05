@@ -33,24 +33,24 @@ const showWinner=(userWin,userChoice,compChoice)=>{
     }
 }
 
-const playGame=(userChoice)=>{
-    const compChoice=genCompChoice();
-    if(userChoice===compChoice){
+const playGame = (userChoice) => {
+    const compChoice = genCompChoice();
+    if (userChoice === compChoice) {
         drawGame();
+        return;
     }
-    else{
-        let userWin=true;
-        if(userChoice==="rock"){
-            userWin = compChoice==="paper"?false:true;
-        } else if(userChoice==="paper"){
-            userWin = compChoice==="scissors"?false:true;
-        }
-        else{
-            userWin = compChoice==="rock"?false:true;
-        }
-        showWinner(userWin,userChoice,compChoice);
+    let userWin = false;
+    // Define winning rules
+    if (
+        (userChoice === "rock" && compChoice === "scissors") ||
+        (userChoice === "paper" && compChoice === "rock") ||
+        (userChoice === "scissors" && compChoice === "paper")
+    ) {
+        userWin = true;
     }
-}
+
+    showWinner(userWin, userChoice, compChoice);
+};
 
 choices.forEach((choice)=>{
     choice.addEventListener("click",()=>{
@@ -59,4 +59,5 @@ choices.forEach((choice)=>{
     });
 
 });
+
 
